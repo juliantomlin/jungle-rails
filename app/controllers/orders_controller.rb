@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    # @item = Product.find_by(order_id: params[:id])
   end
 
   def create
