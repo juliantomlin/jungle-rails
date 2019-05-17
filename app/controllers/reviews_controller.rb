@@ -1,8 +1,11 @@
 class ReviewsController < ApplicationController
+
+  before_action :require_login
+
   def create
     @review = Review.new(review_params)
     @review.user = current_user
-    @review.product_id = params[:product_id]
+    @review.product_id = (params[:product_id])
 
     @review.save
 
@@ -19,4 +22,12 @@ class ReviewsController < ApplicationController
       :rating
     )
   end
+
+  def require_login
+    unless current_user
+      flash[:error] = "please login first"
+      redirect_to login_url
+    end
+  end
+
 end
