@@ -25,6 +25,12 @@
         </dl>
       </div>
     </div>
+    <div>
+      <% @review.each do |review| %>
+        <h4><%= @users.find(review.user_id).e_mail %></h4>
+        <p><%= review.description %></p><h5><%= review.rating %>/5 </h5>
+      <% end %>
+    </div>
 
   </article>
 

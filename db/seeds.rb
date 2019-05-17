@@ -29,13 +29,17 @@ cat1 = Category.find_or_create_by! name: 'Apparel'
 cat2 = Category.find_or_create_by! name: 'Electronics'
 cat3 = Category.find_or_create_by! name: 'Furniture'
 
+user1 = User.create_with(password_digest: '1234').find_or_create_by! e_mail: 'George@email.com'
+user2 = User.create_with(password_digest: '1234').find_or_create_by! e_mail: 'Jane@email.com'
+
 ## PRODUCTS
 
 puts "Re-creating Products ..."
 
 Product.destroy_all
 
-cat1.products.create!({
+
+prod1 = cat1.products.create!({
   name:  'Men\'s Classy shirt',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel1.jpg'),
@@ -43,12 +47,36 @@ cat1.products.create!({
   price: 64.99
 })
 
-cat1.products.create!({
+prod1.reviews.create!({
+  user: user1,
+  description: Faker::Hipster.paragraph(4),
+  rating: 4
+})
+
+prod1.reviews.create!({
+  user: user2,
+  description: Faker::Hipster.paragraph(4),
+  rating: 5
+})
+
+prod2 = cat1.products.create!({
   name:  'Women\'s Zebra pants',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel2.jpg'),
   quantity: 18,
   price: 124.99
+})
+
+prod2.reviews.create!({
+  user: user1,
+  description: Faker::Hipster.paragraph(4),
+  rating: 4
+})
+
+prod2.reviews.create!({
+  user: user2,
+  description: Faker::Hipster.paragraph(4),
+  rating: 5
 })
 
 cat1.products.create!({
@@ -131,6 +159,8 @@ cat3.products.create!({
   quantity: 0,
   price: 2_483.75
 })
+
+
 
 
 puts "DONE!"
