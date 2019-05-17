@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
     @product = Product.find params[:id]
     @review = Review.where("product_id = #{params[:id]}")
     @users = User.all
+    @newreview = Review.new
   end
 
 end
