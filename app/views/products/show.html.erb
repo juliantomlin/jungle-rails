@@ -26,11 +26,12 @@
       </div>
     </div>
     <div>
-
-      <%= form_for [@product, @newreview] do |form| %>
-        <%= form.text_area :description, class: 'form-control' %>
-        <%= form.select :rating, [1, 2, 3, 4, 5] %>
-        <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
+      <% if current_user %>
+        <%= form_for [@product, @newreview] do |form| %>
+          <%= form.text_area :description, class: 'form-control' %>
+          <%= form.select :rating, [1, 2, 3, 4, 5] %>
+          <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
+        <% end %>
       <% end %>
 
       <% @review.each do |review| %>
