@@ -54,6 +54,7 @@ class OrdersController < ApplicationController
       )
     end
     order.save!
+    UserMailer.recept_email(current_user.e_mail, order).deliver_later
     order
   end
 
