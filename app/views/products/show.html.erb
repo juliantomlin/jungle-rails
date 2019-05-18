@@ -25,6 +25,23 @@
         </dl>
       </div>
     </div>
+    <div>
+      <% if current_user %>
+        <%= form_for [@product, @newreview] do |form| %>
+          <%= form.text_area :description, class: 'form-control' %>
+          <%= form.select :rating, [1, 2, 3, 4, 5] %>
+          <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
+        <% end %>
+      <% end %>
+
+      <% @review.each do |review| %>
+        <h4><%= @users.find(review.user_id).e_mail %></h4>
+        <p><%= review.description %></p><h5><%= review.rating %>/5 </h5>
+          <% if current_user == @users.find(review.user_id) %>
+          <%= link_to fa_icon('trash'), [@product, review], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+          <% end %>
+      <% end %>
+    </div>
 
   </article>
 
