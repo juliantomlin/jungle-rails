@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to [:products], notice: 'Registered!'
     else
-      render :new
+      render :index
     end
   end
 
@@ -27,7 +27,8 @@ private
       :first_name,
       :last_name,
       :e_mail,
-      :password
+      :password,
+      :password_confirmation
     )
   end
 
